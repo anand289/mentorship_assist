@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Transcriber</h1>
+      <p class="lead text-body-secondary">Welcome to the transcriber app! Convert speech to text by uploading an
+        audio file here.</p>
+    </div>
+  </div>
+</section>
+
+<div class="p-5 mb-4 bg-body-tertiary rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-6 fw-bold">Upload audio</h1>
+    <form action="/transcriber" method="post" enctype="multipart/form-data">
+      <div id="emailHelp" class="form-text">Upload your audio file here.</div>
+      <div class="input-group mb-3">
+        <input type="file" name="file" accept="mp4,mp3,wav" class="form-control" id="inputGroupFile03"
+          aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+      </div>
+      <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
