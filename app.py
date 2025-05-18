@@ -37,10 +37,10 @@ def transcriber():
     with open(audio_file_path, 'rb') as audio_file:
         transcript = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
 
-    # response = openai.Completion.create( engine = 'gpt-3.5-turbo-instruct',
-    #                                  prompt = message_summary(transcript.text),
-    #                                  temperature = 0.5,
-    #                                  max_tokens = 600)
+    response = openai.Completion.create( engine = 'gpt-3.5-turbo-instruct',
+                                     prompt = message_summary(transcript.text),
+                                     temperature = 0.5,
+                                     max_tokens = 600)
     
     return render_template('transcriber.html', message=transcript.text, filename=file.filename)
 
@@ -50,14 +50,14 @@ def convert_audio_to_wav(input_audio_file, output_wav_file):
      # Convert the audio to WAV format
       audio.export(output_wav_file, format="wav")
 
-# # Generate message summary
-# def message_summary(message):
-#     prompt = f"Generate the summary of the {message}"
-#     return prompt
-# response = openai.Completion.create( engine = 'gpt-3.5-turbo-instruct',
-#                                      prompt = message_summary(message),
-#                                      temperature = 0.5,
-#                                      max_tokens = 600)
+# Generate message summary
+def message_summary(message):
+    prompt = f"Generate the summary of the {message}"
+    return prompt
+response = openai.Completion.create( engine = 'gpt-3.5-turbo-instruct',
+                                     prompt = message_summary(message),
+                                     temperature = 0.5,
+                                     max_tokens = 600)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5003)
